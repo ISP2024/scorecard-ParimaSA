@@ -10,7 +10,10 @@ Observe how the type hint helps it perform static checking.
 
 1) add type to parameter:                `add_score(self, score: float)`
     scorecard.add_score(score) => "add_score" of "Scorecard" has incompatible type "str"; expected "float"
+
 2) add type to return value of average:  `average(self) -> ???`
+    "The average is " + scorecard.average() => Unsupported operand types for + ("str" and "float")
+
 3) add type to self.scores attribute:    `self.scores: ???[???] = []`
 4) add type hints for all parameters and return values.
    If a function does not return a value, don't write a type hint.
@@ -31,7 +34,7 @@ class Scorecard:
         """Add a score to the Scorecard."""
         self.scores.append(score)
 
-    def average(self):
+    def average(self) -> float:
         """Return the average of all scores, 0 if no scores."""
         return sum(self.scores)/max(1,len(self.scores))
 
