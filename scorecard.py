@@ -21,6 +21,7 @@ Observe how the type hint helps it perform static checking.
    Include the type of keys and values.
 
 """
+from typing import List
 
 
 class Scorecard:
@@ -28,7 +29,7 @@ class Scorecard:
 
     def __init__(self):
         """Iniiialize a new Scorecard."""
-        self.scores = []
+        self.scores: List[float] = []
 
     def add_score(self, score: float):
         """Add a score to the Scorecard."""
