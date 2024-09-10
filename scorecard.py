@@ -15,20 +15,21 @@ Observe how the type hint helps it perform static checking.
     "The average is " + scorecard.average() => Unsupported operand types for + ("str" and "float")
 
 3) add type to self.scores attribute:    `self.scores: ???[???] = []`
+
 4) add type hints for all parameters and return values.
    If a function does not return a value, don't write a type hint.
+
 5) add type to the `suffixes` variable in `ordinal()` function. 
    Include the type of keys and values.
-
 """
-from typing import List
+from typing import List, Sized, Iterable, Iterator
 
 
-class Scorecard:
+class Scorecard(Sized, Iterable[float]):
     """Accumulate scores and compute their average."""
 
     def __init__(self):
-        """Iniiialize a new Scorecard."""
+        """Initialize a new Scorecard."""
         self.scores: List[float] = []
 
     def add_score(self, score: float):
@@ -39,19 +40,27 @@ class Scorecard:
         """Return the average of all scores, 0 if no scores."""
         return sum(self.scores)/max(1,len(self.scores))
 
+    def __iter__(self) -> Iterator[float]:
+        """Return an iterator for scores."""
+        return iter(self.scores)
 
-def print_scores(score_card):
+    def __len__(self) -> int:
+        """Return the size of scores"""
+        return len(self.scores)
+
+
+def print_scores(score_card: Scorecard):
     """Print statistics for the scorecard and the actual scores."""
 
-    # What changes to Scorecard are needed in order to make this code work?
+    # What changes to Scorecard are needed in order to make this code work? __len__ and __iter__
     print(f"Scorecard contains {len(score_card)} scores.")
     print(f"Min score: {min(score_card)}  Max score: {max(score_card)}.")
-    # What change to Scorecard is needed to make this work?
+    # What change to Scorecard is needed to make this work? __iter__
     for score in score_card:
         print(score)
 
 
-def ordinal(num):
+def ordinal(num: int) -> str:
     """Return the ordinal value of an integer; works for numbers up to 20.
 
     For examples: ordinal(1) is '1st', ordinal(2) is '2nd'.
