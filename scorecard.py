@@ -22,7 +22,7 @@ Observe how the type hint helps it perform static checking.
 5) add type to the `suffixes` variable in `ordinal()` function. 
    Include the type of keys and values.
 """
-from typing import List, Sized, Iterable, Iterator
+from typing import List, Sized, Iterable, Iterator, Dict
 
 
 class Scorecard(Sized, Iterable[float]):
@@ -65,7 +65,7 @@ def ordinal(num: int) -> str:
 
     For examples: ordinal(1) is '1st', ordinal(2) is '2nd'.
     """
-    suffixes = {1: "st", 2: "nd", 3: "rd"}
+    suffixes: Dict[int, str] = {1: "st", 2: "nd", 3: "rd"}
     return str(num) + suffixes.get(num, "th")
 
 
