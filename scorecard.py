@@ -1,5 +1,5 @@
 """
-This code contains common errors that can by detected 
+This code contains common errors that can be detected
 by static type checking -- if the type is known!
 Please do not fix this code by inspection.
 
@@ -9,6 +9,7 @@ Add these hints ONE AT A TIME.  SAVE the file after each one and run mypy.
 Observe how the type hint helps it perform static checking.
 
 1) add type to parameter:                `add_score(self, score: float)`
+    scorecard.add_score(score) => "add_score" of "Scorecard" has incompatible type "str"; expected "float"
 2) add type to return value of average:  `average(self) -> ???`
 3) add type to self.scores attribute:    `self.scores: ???[???] = []`
 4) add type hints for all parameters and return values.
@@ -26,7 +27,7 @@ class Scorecard:
         """Iniiialize a new Scorecard."""
         self.scores = []
 
-    def add_score(self, score):
+    def add_score(self, score: float):
         """Add a score to the Scorecard."""
         self.scores.append(score)
 
